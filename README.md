@@ -67,4 +67,4 @@ Request → JWT Filter → Authentication → Authorization → Controller
 ## 👨‍💻 Author
 
 **Sandeep Panda**
-🔗 GitHub: https://https://github.com/sandeep-dev-java
+🔗 GitHub: https://github.com/sandeep-dev-java
