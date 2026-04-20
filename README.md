@@ -39,9 +39,12 @@ Request → JWT Filter → Authentication → Authorization → Controller
 
 ---
 
-## 📸 Screenshots
 
-*Screenshots will be added soon...*
+## 📊 Entity Relationship Diagram (ERD)
+
+This diagram represents the database structure of the E-Commerce system including users, orders, products, cart, and more.
+
+![ER Diagram](./images/er-diagram.png)
 
 ---
 
