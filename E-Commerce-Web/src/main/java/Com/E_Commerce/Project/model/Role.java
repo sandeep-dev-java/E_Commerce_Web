@@ -12,10 +12,12 @@ import lombok.ToString;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer roleId;
+    private Long roleId;
     @ToString.Exclude
     @Enumerated(EnumType.STRING)
     @Column(length = 20, name = "Role_Name")
     public User_Role role;
 
+    public Role(User_Role userRole) {
+    }
 }

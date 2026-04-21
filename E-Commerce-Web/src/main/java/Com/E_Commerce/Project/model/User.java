@@ -22,23 +22,20 @@ import java.util.Set;
         , @UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long User_id ;
     @NotBlank
     @Email
     private String email;
-    @NotBlank
-    @Size(max = 10)
-    private String Number;
     @NotBlank @NotNull
     @Size(max=20)
     private String userName;
 @NotBlank
-@Size(max=10,min = 8)
+@Size(min = 8 ,max= 350)
 private String password;
 
-    public User(String email, String number, String userName, String password) {
+    public User(String email, String userName, String password) {
         this.email = email;
-       this. Number = number;
         this.userName = userName;
         this.password = password;
     }
