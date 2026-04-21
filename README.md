@@ -43,7 +43,7 @@ Request → JWT Filter → Authentication → Authorization → Controller
 ## 📊 Entity Relationship Diagram (ERD)
 
 <p align="center">
-  <img src="./ERD_E-com Web.png" alt="ER Diagram" width="300"/>
+  <img src="./ERD_E-com Web.png" alt="ER Diagram" height="200" width="200"/>
 </p>
 
 
