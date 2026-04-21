@@ -62,7 +62,7 @@ Request → JWT Filter → Authentication → Authorization → Controller
 
 ## 🚧 Status
 
-🚀 Backend Completed
+🚀 Backend completed 
 ⚛️ Frontend (React.js) – In Progress
 
 ---
