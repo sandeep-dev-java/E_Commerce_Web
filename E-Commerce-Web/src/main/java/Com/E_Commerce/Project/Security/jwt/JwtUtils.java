@@ -1,14 +1,18 @@
 package Com.E_Commerce.Project.Security.jwt;
 
+import Com.E_Commerce.Project.Security.Services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.WebUtils;
 
 import javax.crypto.SecretKey;
 import java.security.Key;
@@ -23,18 +27,56 @@ public class JwtUtils {
 
     @Value("${spring.app.jwtExpirationMs}")
     private int jwtExpirationMs;
+    @Value("${spring.ecom.app.jwtCookiename}")
+    private String jwtCookie;
 
-    public String getJwtFromHeader(HttpServletRequest request) {
+
+
+
+    public String getJwtCookie(HttpServletRequest request){
+           //webutil is builtin class
+        Cookie cookie= WebUtils.getCookie(request,jwtCookie);
+        if(cookie!=null){
+            return cookie.getValue();
+        }else{
+        return null;
+    }
+    }
+
+    //ResponseCookie is a builtin class
+    public ResponseCookie generateJwtCookie(UserDetailsImpl userPrincipal){
+        String jwt = generateTokenFromUsername(userPrincipal.getUsername());
+  // form is static method and it retirns builder() method maxage
+        // give you time when expire the cookie mine 24 hrs
+    ResponseCookie cookie =ResponseCookie.
+            from(jwtCookie,jwt)
+            .path("/api").maxAge(24*60*60)
+            .build();
+    return cookie;
+
+    }
+    //ResponseCookie is a builtin class
+    public ResponseCookie cleanJwtCookie(){
+        ResponseCookie cookie =
+                ResponseCookie.from(jwtCookie,null)
+                        .path("/api")
+                        .build();
+        return cookie;
+
+    }
+
+
+
+   /* public String getJwtFromHeader(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         logger.debug("Authorization Header: {}", bearerToken);
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7); // Remove Bearer prefix
         }
         return null;
-    }
+    }*/
 
-    public String generateTokenFromUsername(UserDetails userDetails) {
-        String username = userDetails.getUsername();
+    public String generateTokenFromUsername(String username) {
         return Jwts.builder()
                 .subject(username)
                 .issuedAt(new Date())

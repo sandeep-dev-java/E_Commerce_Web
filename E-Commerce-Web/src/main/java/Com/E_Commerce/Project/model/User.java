@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.action.internal.OrphanRemovalAction;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -53,10 +55,13 @@ private String password;
     private Set<Product> products= new HashSet<>();
     @Getter
     @Setter
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name="user_address",
+    @OneToMany(mappedBy = "user",cascade = {CascadeType.PERSIST,CascadeType.MERGE}, orphanRemoval = true)
+    /*@JoinTable(name="user_address",
     joinColumns = @JoinColumn(name = "user_id")
-    ,inverseJoinColumns = @JoinColumn(referencedColumnName = "addressId"))
+    ,inverseJoinColumns = @JoinColumn(referencedColumnName = "addressId"))*/
  private List<Address> addresses= new ArrayList<>();
 
+    @ToString.Exclude
+    @OneToOne(mappedBy = "user",cascade = {CascadeType.PERSIST,CascadeType.MERGE} )
+    private Cart cart;
 }

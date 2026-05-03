@@ -3,12 +3,18 @@ package Com.E_Commerce.Project.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 @Table(name="Address")
 @Entity
+@Setter
+@Getter
+@Data
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +43,9 @@ public class Address {
     @NotBlank
     @Size(min=6,message = "code name must be atleast 6 Characters")
     private String pincode;
-     @ToString.Exclude
-    @ManyToMany(mappedBy = "addresses")
-    private List<User> users= new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user ;
 
 
 

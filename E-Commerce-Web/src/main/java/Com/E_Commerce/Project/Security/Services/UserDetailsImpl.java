@@ -34,7 +34,13 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    // Builder method
+    // Builder methodSpring Security ko direct tumhara User entity samajh nahi aata
+    //Usko chahiye hota hai UserDetails object
+    //
+    //👉 Isliye tum ye conversion kar rahe ho:
+    //
+    //User (DB Entity)  ➝  UserDetailsImpl (Security object)
+
   public  static  UserDetailsImpl build(User user){
       List<GrantedAuthority> authorities= user.getRoles().
               stream().
