@@ -43,7 +43,7 @@ Request → JWT Filter → Authentication → Authorization → Controller
 ## 📊 Entity Relationship Diagram (ERD)
 
 <p align="center">
-  <img src="./ERD_E-com Web.png" alt="ER Diagram" width="300"/>
+  <img src="./ERD_E-com Web.png" alt="ER Diagram" height="200" width="200"/>
 </p>
 
 
@@ -62,7 +62,7 @@ Request → JWT Filter → Authentication → Authorization → Controller
 
 ## 🚧 Status
 
-🚀 Backend Completed
+🚀 Backend completed 
 ⚛️ Frontend (React.js) – In Progress
 
 ---
